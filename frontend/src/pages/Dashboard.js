@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import API from '../services/api'; // ✅ Use your axios instance
 import SessionCard from '../components/SessionCard';
 
 const Dashboard = () => {
@@ -8,7 +8,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchSessions = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/sessions');
+        const res = await API.get('/sessions'); // ✅ Use relative API call
         setSessions(res.data);
       } catch (err) {
         console.error('❌ Error fetching sessions:', err);
@@ -23,7 +23,7 @@ const Dashboard = () => {
       <h2 style={styles.heading}>Wellness Sessions</h2>
       <div style={styles.cardGrid}>
         {sessions
-          .filter((s) => s.status === 'published')
+          .filter((s) => s.status === 'published') // ✅ Keep this filter
           .map((s) => (
             <SessionCard key={s._id} session={s} />
           ))}
