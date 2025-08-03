@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-<h1>🚨 TEST BUILD 01 🚨</h1>
+import API from '../services/api';
+
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -10,9 +10,9 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/login', { email, password });
+      const res = await API.post('/login', { email, password });
       localStorage.setItem('token', res.data.token);
-      navigate('/dashboard'); // You can change this to '/real-dashboard' if needed
+      navigate('/dashboard');
     } catch (err) {
       alert('Login failed. Check email or password.');
     }
