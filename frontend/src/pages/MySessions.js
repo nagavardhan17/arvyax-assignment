@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import API from '../services/api'; // ✅ Corrected import
 import SessionCard from '../components/SessionCard';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,22 +9,17 @@ const MySessions = () => {
 
   const fetchSessions = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/my-sessions', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await API.get('/my-sessions');
       setSessions(res.data);
     } catch (err) {
+      console.error('Fetch error:', err);
       alert('Failed to load sessions');
     }
   };
 
   const handleDelete = async (id) => {
     try {
-      const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/my-sessions/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await API.delete(`/my-sessions/${id}`);
       setSessions(sessions.filter((s) => s._id !== id));
     } catch (err) {
       alert('❌ Failed to delete session');
