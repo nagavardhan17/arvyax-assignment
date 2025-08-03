@@ -1,0 +1,51 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+  
+  .container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.7);
+  }
+  
+  input, button {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 4px;
+    border: 1px solid #444;
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+  }
+  
+  button {
+    background-color: #3b3b3b;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  button:hover {
+    background-color: #555;
+  }
+  
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .session-card {
+    background-color: #1f1f1f;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+  
