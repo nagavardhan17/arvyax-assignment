@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API from '../services/api';
 
@@ -7,14 +7,21 @@ const RegisterPage = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // Redirect if already logged in
+    if (localStorage.getItem('token')) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, []);
+
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
       const res = await API.post('/register', { email, password });
       localStorage.setItem('token', res.data.token);
-      navigate('/dashboard');
+      navigate('/dashboard', { replace: true });
     } catch (err) {
-      alert('Registration failed. Try with a different email.');
+      alert('❌ Registration failed. Try with a different email.');
     }
   };
 

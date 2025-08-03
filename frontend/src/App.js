@@ -1,5 +1,5 @@
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import Dashboard from './pages/Dashboard';
@@ -9,7 +9,13 @@ import FeatureHub from './pages/FeatureHub';
 import Navbar from './components/Navbar';
 
 const App = () => {
-  const isLoggedIn = !!localStorage.getItem('token');
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
+  const location = useLocation();
+
+  useEffect(() => {
+    // Refresh login status on every route change
+    setIsLoggedIn(!!localStorage.getItem('token'));
+  }, [location]);
 
   return (
     <div>
@@ -34,7 +40,7 @@ const App = () => {
         } />
       </Routes>
     </div>
-  );// Trigger redeploy with updated API
+  );
 };
 
 export default App;

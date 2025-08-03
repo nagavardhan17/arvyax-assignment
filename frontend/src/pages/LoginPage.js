@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API from '../services/api';
 
@@ -7,12 +7,19 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // Prevent access to login if already logged in
+    if (localStorage.getItem('token')) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, []);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const res = await API.post('/login', { email, password });
       localStorage.setItem('token', res.data.token);
-      navigate('/dashboard');
+      navigate('/dashboard', { replace: true }); // Replace history
     } catch (err) {
       alert('Login failed. Check email or password.');
     }
