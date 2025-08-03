@@ -34,7 +34,7 @@ const App = () => {
         } />
       </Routes>
     </div>
-  );
+  );// Trigger redeploy with updated API
 };
 
 export default App;
